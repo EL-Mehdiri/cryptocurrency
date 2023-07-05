@@ -9,11 +9,19 @@ export default configureStore({
         [cryptoNewsApi.reducerPath]: cryptoNewsApi.reducer,
 
     },
-
-    middleware: (getDefaultMiddleware) => {
-        return getDefaultMiddleware().concat(cryptoApi.middleware)
-        // , getDefaultMiddleware().concat(cryptoNewsApi.middleware)
-    }
+    // this middleware does not worke 
+    // middleware: (getDefaultMiddleware) => {
+    //     return getDefaultMiddleware().concat(cryptoApi.middleware)
+    //     // , getDefaultMiddleware().concat(cryptoNewsApi.middleware)
+    // }
+    // this is my solution to fix this bug
+    middleware:
+        (getdefaultMiddleware) =>
+            getdefaultMiddleware()
+                .concat([
+                    cryptoApi.middleware,
+                    cryptoNewsApi.middleware
+                ])
 });
 
 
