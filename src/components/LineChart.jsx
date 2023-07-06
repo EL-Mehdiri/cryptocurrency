@@ -1,18 +1,30 @@
-
 import React from 'react';
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+
+} from 'chart.js';
 import { Line } from 'react-chartjs-2';
+
 import { Col, Row, Typography } from 'antd';
-// import Chart from 'chart.js/auto';
-import { Chart as ChartJS, registerables } from 'chart.js';
-import { Chart } from 'react-chartjs-2'
-ChartJS.register(...registerables);
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+
+);
 
 const { Title } = Typography;
 
 const LineChart = ({ coinHistory, currentPrice, coinName }) => {
     const coinPrice = [];
     const coinTimestamp = [];
-
+    console.log(coinHistory)
     for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
         coinPrice.push(coinHistory?.data?.history[i].price);
     }
@@ -26,7 +38,7 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
             {
                 label: 'Price In USD',
                 data: coinPrice,
-                fill: false,
+                fill: true,
                 backgroundColor: '#0071bd',
                 borderColor: '#0071bd',
             },
